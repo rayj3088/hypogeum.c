@@ -13,6 +13,8 @@
 > Speed rises with warm-up and with storage and memory bandwidth. Bandwidth-derived ceiling for the 35B on this class of hardware: ~10-15 tokens/sec.
 >
 > Fully offline: the engine contains no network code. Only shardpress uses the network, to download weights.
+>
+> This is experimental: the 35B's experts are converted to ternary without retraining, so its answers may differ from the original model.
 
 ## The system
 
