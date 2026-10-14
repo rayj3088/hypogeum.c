@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-label="shardpress feeds holopress, holopress feeds the holomoe engine, holotrain warms the engine up">
+<defs>
+<linearGradient id="iri" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+<stop offset="0" stop-color="#7ff3ff"/><stop offset=".35" stop-color="#b48cff"/><stop offset=".7" stop-color="#ff7fd8"/><stop offset="1" stop-color="#ffd37a"/></linearGradient>
+<linearGradient id="ink" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="900" y2="0">
+<stop offset="0" stop-color="#9ff6ff"/><stop offset=".5" stop-color="#c9a6ff"/><stop offset="1" stop-color="#ff9fe0"/></linearGradient>
+<linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#7ff3ff" stop-opacity="0.16"/><stop offset="1" stop-color="#b48cff" stop-opacity="0.06"/></linearGradient>
+<linearGradient id="top" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#7ff3ff" stop-opacity="0.34"/><stop offset="1" stop-color="#ff7fd8" stop-opacity="0.34"/></linearGradient>
+<linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#ff7fd8" stop-opacity="0.1"/><stop offset="1" stop-color="#b48cff" stop-opacity="0.05"/></linearGradient>
+<pattern id="fringe" width="6" height="4" patternUnits="userSpaceOnUse"><rect width="6" height="1" fill="#7ff3ff" opacity="0.1"/></pattern>
+<linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity="0.35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<filter id="glow" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feComponentTransfer in="b" result="g"><feFuncA type="linear" slope="0.9"/></feComponentTransfer><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#b48cff" flood-opacity="0.18"/></filter>
+</defs>
+<style>@media (prefers-reduced-motion: reduce){.sweep{display:none}}</style>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b48cff"/></marker>
+<clipPath id="cl"><path d="M60,44 L78,31.4 L438,31.4 L420,44 Z"/><path d="M420,44 L438,31.4 L438,177.4 L420,190 Z"/><rect x="60" y="44" width="360" height="146"/><path d="M500,70 L518,57.4 L878,57.4 L860,70 Z"/><path d="M860,70 L878,57.4 L878,177.4 L860,190 Z"/><rect x="500" y="70" width="360" height="120"/><path d="M60,270 L78,257.4 L438,257.4 L420,270 Z"/><path d="M420,270 L438,257.4 L438,377.4 L420,390 Z"/><rect x="60" y="270" width="360" height="120"/><path d="M500,244 L518,231.4 L878,231.4 L860,244 Z"/><path d="M860,244 L878,231.4 L878,377.4 L860,390 Z"/><rect x="500" y="244" width="360" height="146"/></clipPath>
+<line x1="444" y1="130" x2="490" y2="130" stroke="url(#iri)" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="680" y1="206" x2="680" y2="214" stroke="url(#iri)" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="444" y1="330" x2="490" y2="330" stroke="url(#iri)" stroke-width="3" marker-end="url(#ar)"/>
+<g filter="url(#soft)"><path d="M60,44 L78,31.4 L438,31.4 L420,44 Z" fill="url(#top)" stroke="url(#iri)" stroke-width="1.2"/><path d="M420,44 L438,31.4 L438,177.4 L420,190 Z" fill="url(#side)" stroke="url(#iri)" stroke-width="1.2"/><rect x="60" y="44" width="360" height="146" fill="url(#front)" stroke="url(#iri)" stroke-width="1.6"/><rect x="60" y="44" width="360" height="146" fill="url(#fringe)"/></g>
+<g filter="url(#soft)"><path d="M500,70 L518,57.4 L878,57.4 L860,70 Z" fill="url(#top)" stroke="url(#iri)" stroke-width="1.2"/><path d="M860,70 L878,57.4 L878,177.4 L860,190 Z" fill="url(#side)" stroke="url(#iri)" stroke-width="1.2"/><rect x="500" y="70" width="360" height="120" fill="url(#front)" stroke="url(#iri)" stroke-width="1.6"/><rect x="500" y="70" width="360" height="120" fill="url(#fringe)"/></g>
+<g filter="url(#soft)"><path d="M60,270 L78,257.4 L438,257.4 L420,270 Z" fill="url(#top)" stroke="url(#iri)" stroke-width="1.2"/><path d="M420,270 L438,257.4 L438,377.4 L420,390 Z" fill="url(#side)" stroke="url(#iri)" stroke-width="1.2"/><rect x="60" y="270" width="360" height="120" fill="url(#front)" stroke="url(#iri)" stroke-width="1.6"/><rect x="60" y="270" width="360" height="120" fill="url(#fringe)"/></g>
+<g filter="url(#soft)"><path d="M500,244 L518,231.4 L878,231.4 L860,244 Z" fill="url(#top)" stroke="url(#iri)" stroke-width="1.2"/><path d="M860,244 L878,231.4 L878,377.4 L860,390 Z" fill="url(#side)" stroke="url(#iri)" stroke-width="1.2"/><rect x="500" y="244" width="360" height="146" fill="url(#front)" stroke="url(#iri)" stroke-width="1.6"/><rect x="500" y="244" width="360" height="146" fill="url(#fringe)"/></g>
+<g clip-path="url(#cl)" class="sweep"><rect x="-200" y="-20" width="160" height="470" fill="url(#sheen)" transform="skewX(-20)"><animate attributeName="x" values="-260;1100" dur="9s" repeatCount="indefinite"/></rect></g>
+<text x="240.0" y="113.0" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="url(#ink)" filter="url(#glow)">shardpress</text>
+<text x="240.0" y="141.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#c6d3e6">downloads the official weights</text>
+<text x="680.0" y="126.0" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="url(#ink)" filter="url(#glow)">holopress</text>
+<text x="680.0" y="154.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#c6d3e6">presses them into a plate</text>
+<text x="240.0" y="326.0" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="url(#ink)" filter="url(#glow)">holotrain</text>
+<text x="240.0" y="354.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#c6d3e6">warm-up from your documents</text>
+<text x="680.0" y="313.0" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="url(#ink)" filter="url(#glow)">holomoe</text>
+<text x="680.0" y="341.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#c6d3e6">the engine: RAM + streamed experts</text>
+</svg>

@@ -1,0 +1,35 @@
+# model data and personal warm-up data stay local
+*.txt
+!requirements.txt
+*.json
+*.md
+!README.md
+*.png
+*.jpg
+*.jpeg
+*.heic
+*.tok
+*.plate
+*.bin
+*.safetensors
+*.gguf
+*.npy
+*.npz
+plate*/
+raw/
+state*.json
+shards/
+cache/
+weights/
+# documents fed to the trainer
+*.pdf
+*.docx
+*.epub
+# build and system
+holomoe
+*.o
+__pycache__/
+.venv/
+venv/
+.DS_Store
+*.log
