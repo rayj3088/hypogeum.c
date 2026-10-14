@@ -8,7 +8,7 @@
 > [!NOTE]
 > **Reference machine:** an older mid-range MacBook Pro (dual-core x86, 8 GB RAM), CPU only.
 >
-> **Qwen3.6-35B-A3B** (35B MoE): ~2 tokens/sec in ~2 GB of resident RAM. **Qwen3.5-2B** (dense): 8.32 tokens/sec from a cold start, ~1.9 GB in RAM.
+> **Qwen3.6-35B-A3B** (35B MoE): ~2 tokens/sec in ~2 GB of resident RAM (~4-5 GB in use with OS cache). **Qwen3.5-2B** (dense): 8.32 tokens/sec from a cold start, ~1.9 GB in RAM.
 >
 > Speed rises with warm-up and with storage and memory bandwidth. Bandwidth-derived ceiling for the 35B on this class of hardware: ~10-15 tokens/sec.
 >
@@ -27,24 +27,24 @@
 
 **shardpress** downloads a model one shard at a time, hands each shard to holopress, verifies the result and deletes the raw shard. It pauses and resumes at any point, survives power loss, and writes the engine's settings (`model.cfg`, `vocab.bin`) when the last shard is done. Progress shows in the terminal and on a status page in the default browser (`--no-browser` skips the page).
 
-**holopress** presses each shard into the plate. Experts become ternary bitplanes (-1, 0, +1) with one scale per group of 128 weights, about 2.1 bits per weight. Everything else is copied exactly. Every piece is written atomically with a checksum, so an interrupted run resumes without redoing verified work.
+**holopress** presses each shard into the plate. Experts become ternary bitplanes (-1, 0, +1) with one scale per group of 128 weights, about 2.1 bits per weight. Everything else is copied exactly (the engine runs it at int8). Every piece is written atomically with a checksum, so an interrupted run resumes without redoing verified work.
 
 **The engine** (`holomoe.c`, binary `holomoe`) runs inference in pure C:
 
-- Hybrid attention, as in the reference model: Gated DeltaNet linear attention in 3 of every 4 layers (a fixed-size memory per head, so long conversations stay cheap) and gated full attention every 4th layer.
+- Hybrid attention, as in Qwen's architecture: Gated DeltaNet linear attention in 3 of every 4 layers (a fixed-size memory per head, so long conversations stay cheap) and gated full attention every 4th layer.
 - 256 routed experts per layer (top 8) plus one always-on shared expert. Experts are memory-mapped zero-copy from the plate and paged in per token. Ternary math runs on popcount.
 - An 8-bit fast-boot copy of the always-used weights is built on first run. After that, boot takes seconds.
 - Next-layer experts are predicted and requested from the SSD early. A heat map keeps the most-used experts warm in RAM.
-- Speculative decoding: a guessing memory proposes the next few tokens and the model verifies them in one pass. Accepted tokens are exactly what the model would have written on its own. Guessing switches on once warm-up shows it helps on the machine, or by hand with `--guess N`.
+- Speculative decoding: a guessing memory proposes the next few tokens and the model verifies them in one pass. Output is verified byte-identical with and without guessing. Guessing switches on once warm-up shows it helps on the machine, or by hand with `--guess N`.
 - On x86, int8 math is AVX2-vectorized. ARM builds use the portable math path.
 
 **holotrain** is the warm-up trainer. It never changes model weights. It learns which experts to keep warm, which phrases to guess, and the fastest settings that hold quality, including whether guessing pays off on that machine. Feed it PDF, Word, Markdown, ePub, plain text, code and images (via macOS OCR). Fed files become practice questions and searchable passages that the engine draws on in chat. A live page in the default browser shows speed, guess-hit rate and hardware ceilings, with pause, resume and stop.
 
 ## Models
 
-- **35b** (default): Qwen3.6-35B-A3B. 256 experts, top 8, 40 layers. Plate: 14.6 GB. Measured: 2.01 tokens/sec after warm-up.
-- **2b**: Qwen3.5-2B. Dense, 24 layers. Plate: 5.5 GB. Runs fully in RAM (~1.9 GB) and boots in about 6 seconds. Measured: 8.32 tokens/sec cold, no warm-up needed.
-- **30b** (optional): Qwen3-30B-A3B, for machines with more headroom.
+- **35b** (default): [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B). 256 experts, top 8, 40 layers. Plate: 14.6 GB. Measured: 2.01 tokens/sec after warm-up.
+- **2b**: [Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B). Dense, 24 layers. Plate: 5.5 GB. Runs fully in RAM (~1.9 GB) and boots in about 6 seconds. Measured: 8.32 tokens/sec cold, no warm-up needed.
+- **30b** (optional): [Qwen3-30B-A3B](https://huggingface.co/Qwen/Qwen3-30B-A3B), for machines with more headroom.
 
 Each model lives in its own plate folder (`plate`, `plate-2b`, `plate-30b`) with its own learning and stats. Choose one with `--model`.
 
@@ -78,7 +78,7 @@ Faster storage and memory raise every number.
 
 ## Setup
 
-The tools keep their files in `~/holomoe`, so clone there:
+The tools keep their files in `~/holomoe` (the engine's working name), so clone there:
 
 ```
 git clone https://github.com/rayj3088/hypogeum.c ~/holomoe
@@ -169,7 +169,7 @@ Streaming mixture-of-experts weights from storage is an active area: LLM in a Fl
 
 ## Credits
 
-- Model weights: the Qwen team at Alibaba Cloud (Qwen3.6-35B-A3B, Qwen3.5-2B, Qwen3-30B-A3B), used under Qwen's license.
+- Model weights: the Qwen team at Alibaba Cloud (Qwen3.6-35B-A3B, Qwen3.5-2B, Qwen3-30B-A3B), downloaded by the user under Qwen's license.
 - Gated DeltaNet: Yang, Kautz and Hatamizadeh, "Gated Delta Networks: Improving Mamba2 with Delta Rule," 2024.
 - Streaming weights from flash: Alizadeh et al., "LLM in a Flash: Efficient Large Language Model Inference with Limited Memory," Apple, 2023.
 - Speculative decoding: Leviathan, Kalman and Matias, "Fast Inference from Transformers via Speculative Decoding," 2023; Chen et al., "Accelerating Large Language Model Decoding with Speculative Sampling," 2023.
